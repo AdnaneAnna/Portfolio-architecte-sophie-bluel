@@ -1,6 +1,6 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126 
+   License: none (public domain) 
 */
 
 html, body, div, span, applet, object, iframe,
@@ -16,173 +16,588 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-/** end reset css**/
-body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-}
-header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
-}
-section {
-	margin: 50px 0
+    display: block;
 }
 
-h1{
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/** End reset CSS **/
+
+/* Styles globaux */
+body {
+    max-width: 1140px;
+    margin: auto;
+    font-family: 'Work Sans';
+    font-size: 14px;
+    background-color: #FAF7F2; /* Couleur de fond */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+h1 {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Syne';
+    font-size: 22px;
+    font-weight: 800;
+    color: #B1663C;
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
-;
+    font-family: 'Work Sans';
+    font-size: 10px;
+    letter-spacing: 0.1em;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+h2 {
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 30px;
+    color: #1D6154;
+    margin-bottom: 1em;
 }
+
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
-
+    display: flex;
+    align-items: center;
+    list-style-type: none;
 }
+
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+    padding: 0 10px;
+    font-size: 1.2em;
 }
 
 li:hover {
-	color: #B1663C;
+    color: #B1663C;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: #B1663C;
+}
+
+/* Styles pour la page principale */
 #introduction {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
+
 #introduction figure {
-	flex: 1
+    flex: 1;
 }
+
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+    display: block;
+    margin: auto;
+    width: 80%;
 }
 
 #introduction article {
-	flex: 1
+    flex: 1;
 }
+
 #introduction h2 {
-	margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
+    text-align: center;
+    margin-bottom: 1em;
+    margin-top: 2em;
 }
+
+/* Styles pour la galerie */
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
 
 .gallery img {
-	width: 100%;
-
+    width: 100%;
 }
+
+/* Styles pour le contact */
 #contact {
-	width: 50%;
-margin: auto;
+    width: 50%;
+    margin: auto;
 }
-#contact > * {
-	text-align: center;
 
+#contact > * {
+    text-align: center;
 }
-#contact h2{
-	margin-bottom: 20px;
+
+#contact h2 {
+    margin-bottom: 20px;
 }
+
 #contact form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+    text-align: left;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    height: 50px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
-	margin: 2em 0 1em 0;
+    margin: 2em 0 1em 0;
 }
+
 #contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
+input[type="submit"] {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    width: 180px;
+    text-align: center;
+    border-radius: 60px;
 }
 
+/* Footer styles */
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+    display: flex;
+    justify-content: flex-end;
+    margin: 2em;
 }
 
+/* Style pour la barre noire */
+#edit-bar {
+    background-color: #000000; /* Couleur noire */
+    color: white; /* Couleur du texte */
+    width: 100vw; /* Prend 100% de la largeur de la fenêtre */
+    position: fixed; /* Fixe la barre en haut */
+    top: 0; /* Fixée en haut de la fenêtre */
+    left: 0; /* Fixée à gauche de la fenêtre */
+    z-index: 9999; /* Assure que la barre est au-dessus des autres éléments */
+    text-align: center; /* Centre le texte */
+    padding: 10px 0; /* Espace vertical */
+    font-size: 16px; /* Taille du texte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit-bar p {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Police claire et lisible */
+}
+
+/* Styles pour les filtres */
+#filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em; /* Espace plus large en bas */
+    gap: 10px;
+}
+
+#filters button {
+    background-color: transparent;
+    color: #1D6154;
+    font-family: 'Work Sans';
+    font-size: 14px;
+    padding: 4px 10px; /* Ajustement du padding pour coller plus au texte */
+    border: 1px solid #1D6154;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#filters button:hover {
+    background-color: #1D6154;
+    color: white;
+}
+
+#filters button.active {
+    background-color: #1D6154;
+    color: white;
+}
+
+#edit-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    z-index: 1000; /* Assure que la barre est toujours au-dessus du contenu */
+}
+
+.portfolio-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre horizontalement le contenu */
+    gap: 10px; /* Espace entre le titre et le bouton */
+}
+
+.edit-projects-button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.edit-projects-button i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+}
+
+.edit-projects-button:hover {
+    color: #1D6154; /* Change la couleur au survol */
+}
+
+/* Styles pour la modale */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 10001;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Ajustements pour la galerie modale */
+.gallery-modal {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
+    column-gap: 5px;
+    row-gap: 30px;
+    max-height: 500px;
+    overflow-y: hidden;
+    padding: 20px;
+}
+
+.gallery-modal figure {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-modal img {
+    width: 100%;
+    height: 150px; /* Plus haute que large */
+    object-fit: cover;
+    border-radius: 5px;
+    margin: auto;
+    display: block;
+}
+
+/* Styles pour le bouton de suppression */
+.delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px; /* Taille légèrement réduite */
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Assure que le bouton reste visible */
+}
+
+.delete-icon:hover {
+    background-color: red;
+}
+
+/* Empêche les icônes de sortir des images */
+.gallery-modal figure {
+    position: relative;
+}
+
+/* Trait de séparation et bouton d'ajout en bas de la modale */
+.modal-content hr {
+    margin-top: 20px;
+    border: 0;
+    border-top: 2px solid #1D6154;
+}
+
+#addNewPhotoBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Syne';
+    font-weight: 700;
+    text-align: center;
+}
+
+#addNewPhotoBtn:hover {
+    background-color: #144536;
+}
+
+/* Styles spécifiques pour la vue "Ajout photo" de la modale */
+#add-photo-view {
+    display: none; /* Caché par défaut, visible quand l'utilisateur ajoute un projet */
+}
+
+#add-photo-view h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#add-photo-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+#add-photo-form label {
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    text-align: left;
+}
+
+#add-photo-form input, #add-photo-form select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#add-photo-form button {
+    padding: 10px;
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Syne';
+    font-weight: 700;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#add-photo-form button:hover {
+    background-color: #144536;
+}
+
+/* Style spécifique pour le bouton "Ajouter une photo" */
+#add-photo-form #image {
+    display: none; /* Masquer l'input du fichier */
+}
+
+#add-photo-form label[for="image"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    height: 150px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    color: #666;
+}
+
+#add-photo-form label[for="image"]:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Texte à l'intérieur du label */
+#add-photo-form label[for="image"]::before {
+    content: '+ Ajouter photo';
+    font-size: 16px;
+    color: #666;
+}
+
+#add-photo-form label[for="image"]::after {
+    content: 'Jpg, png : 4mo max';
+    font-size: 12px;
+    color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Style du bouton de validation */
+#add-photo-form button[type="submit"] {
+    background-color: #A7A7A7; /* Couleur grise pour l'état initial (désactivé) */
+    cursor: not-allowed; /* Désactive le bouton par défaut */
+}
+
+/* Activer le bouton "Valider" quand tous les champs sont remplis */
+#add-photo-form input:valid + #add-photo-form select:valid + #add-photo-form button {
+    background-color: #1D6154; /* Couleur verte pour l'état actif */
+    cursor: pointer;
+}
+
+
+
+/* Styles pour la section de connexion */
+.login-section {
+    max-width: 350px;
+    margin: 150px auto;
+    padding: 40px;
+    border-radius: 5px;
+    background-color: white; /* Fond blanc pour la section */
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1); /* Ombre subtile pour donner de la profondeur */
+}
+
+.login-section h2 {
+    text-align: center;
+    font-family: 'Syne';
+    color: #1D6154; /* Couleur verte cohérente avec le reste du site */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacement entre les champs de formulaire */
+}
+
+.login-section label {
+    text-align: left;
+    font-size: 14px;
+    color: #1D6154;
+}
+
+.login-section input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.05); /* Légère ombre autour des champs */
+}
+
+.login-section button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1D6154; /* Vert foncé utilisé sur d'autres parties du site */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Syne';
+    font-weight: 700;
+}
+
+.login-section button:hover {
+    background-color: #144536; /* Change de couleur au survol */
+}
+
+/* Styles pour le lien "Mot de passe oublié" */
+.forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: black;
+    text-decoration: underline;
+}
+
+.forgot-password:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+/* Message d'erreur */
+#error-message {
+    color: red;
+    display: none; /* Cache le message d'erreur par défaut */
+    text-align: center; /* Centre le texte du message d'erreur */
+    margin-top: 15px;
+    font-size: 14px;
+}
