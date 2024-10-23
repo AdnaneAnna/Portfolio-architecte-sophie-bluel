@@ -53,7 +53,7 @@ function checkIfLoggedIn() {
         loginLink.addEventListener('click', (event) => {
             event.preventDefault();
             localStorage.removeItem('token'); // Supprime le token pour déconnexion
-            window.location.href = 'index.html'; // Redirige après la déconnexion
+            window.location.href = 'login.html'; // Redirige vers la page de connexion après la déconnexion
         });
     } else {
         editProjectsBtn.style.display = 'none'; // Cache le bouton "Modifier" si non connecté
