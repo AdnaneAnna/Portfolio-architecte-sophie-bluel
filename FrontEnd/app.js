@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addPhotoView = document.getElementById('add-photo-view');
     const editProjectsBtn = document.getElementById('editProjectsBtn');
     const editBar = document.getElementById('edit-bar');
-    const imagePreview = document.getElementById('img-preview');
+    const imagePreview = document.getElementById("imagePreview");
     const backArrow = document.getElementById('back-arrow'); // Back arrow element
 
     // Fonction pour ouvrir le sélecteur de fichier lorsque l'on clique sur "Ajouter une photo"
@@ -57,6 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Réinitialiser les champs du formulaire d'ajout
         imageInput.value = ""; // Réinitialise l'input de fichier
         imagePreview.style.display = "none"; // Cache l'aperçu de l'image
+        const iconPreview = document.querySelector('.icon-upload-preview');
+        const buttonLabel = document.querySelector('.file-upload-label');
+        const fileInfo = document.querySelector('.file-info');
+
+        iconPreview.style.display = "block";
+        buttonLabel.style.display = "inline-block";
+        fileInfo.style.display = "block";
+
         titleInput.value = ""; // Réinitialise le champ titre
         categoryInput.value = ""; // Réinitialise la sélection de catégorie
         submitButton.disabled = true; // Désactive le bouton Ajouter
@@ -184,74 +192,108 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Erreur lors de la suppression du projet:', error));
     }
 
-    // Prévisualisation de l'image ajoutée
+    // Prévisualisation de l'image ajoutée et gestion de l'affichage
     imageInput.addEventListener('change', function () {
-        const file = this.files[0];
-        const reader = new FileReader();
+        const file = this.files[0]; // Récupère le fichier sélectionné
+        const iconPreview = document.querySelector('.icon-upload-preview');
+        const buttonLabel = document.querySelector('.file-upload-label');
+        const fileInfo = document.querySelector('.file-info');
 
-        reader.addEventListener("load", function () {
-            imagePreview.src = reader.result;
-            imagePreview.style.display = "block";
-            imagePreview.style.height = "auto";  // Ajuster la hauteur pour correspondre au conteneur
-            imagePreview.style.maxHeight = "150px"; // Hauteur maximale souhaitée dans la maquette
-        });
+        if (file) {
+            const reader = new FileReader();
 
-        reader.readAsDataURL(file);
+            reader.addEventListener("load", function () {
+                // Remplace les éléments par l'image sélectionnée
+                imagePreview.src = reader.result;
+                imagePreview.style.display = "block";
+                
+                // Cacher les autres éléments
+                iconPreview.style.display = "none";
+                buttonLabel.style.display = "none";
+                fileInfo.style.display = "none";
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            // Réinitialiser l'affichage si aucun fichier n'est sélectionné
+            imagePreview.style.display = "none";
+            iconPreview.style.display = "block";
+            buttonLabel.style.display = "inline-block";
+            fileInfo.style.display = "block";
+        }
     });
 
-    // Fonction pour vérifier l'état du bouton "Ajouter"
+    // Vérification des champs du formulaire pour activer ou désactiver le bouton "Ajouter"
     function checkFormFields() {
         const isFilled = imageInput.files.length > 0 && titleInput.value.trim() && categoryInput.value;
         submitButton.disabled = !isFilled; // Active ou désactive le bouton
     }
+
+
+    // Fonction pour soumettre un nouveau projet
+addPhotoForm.addEventListener('submit', async function (event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+
+    // Récupérez les données du formulaire
+    const file = imageInput.files[0]; // L'image sélectionnée
+    const title = titleInput.value.trim();
+    const category = categoryInput.value;
+
+    if (!file || !title || !category) {
+        alert('Veuillez remplir tous les champs.');
+        return;
+    }
+
+    // Préparer les données pour l'API
+    const formData = new FormData();
+    formData.append('image', file); // Ajoute l'image
+    formData.append('title', title); // Ajoute le titre
+    formData.append('category', category); // Ajoute la catégorie
+
+    try {
+        // Envoyer la requête POST à l'API
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Projet ajouté avec succès.');
+            
+            // Rechargez les projets pour mettre à jour la galerie
+            fetchAndDisplayProjects();
+
+            // Réinitialiser le formulaire
+            addPhotoForm.reset();
+            imagePreview.style.display = "none";
+            submitButton.disabled = true;
+
+               // Fermer la modale après ajout réussi
+               closeModal();
+
+            // Retour à la vue principale de la galerie dans la modale
+            backArrow.click();
+        } else {
+            const errorData = await response.json();
+            console.error('Erreur lors de l\'ajout du projet :', errorData);
+            alert('Impossible d\'ajouter le projet.');
+        }
+    } catch (error) {
+        console.error('Erreur réseau ou serveur :', error);
+        alert('Une erreur est survenue lors de l\'ajout du projet.');
+    }
+});
+
 
     // Écouteurs pour vérifier les champs du formulaire
     imageInput.addEventListener('change', checkFormFields);
     titleInput.addEventListener('input', checkFormFields);
     categoryInput.addEventListener('change', checkFormFields);
 
-    // Gestion du formulaire d'ajout de photo
-    addPhotoForm.addEventListener('submit', (event) => {
-        event.preventDefault(); 
-
-        if (!imageInput.files.length || !titleInput.value.trim() || !categoryInput.value) {
-            alert('Veuillez remplir tous les champs et ajouter une image.');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('title', titleInput.value);
-        formData.append('category', categoryInput.value);
-        formData.append('image', imageInput.files[0]);
-
-        fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.id && data.imageUrl) {
-                alert('Projet ajouté avec succès');
-                const newProject = {
-                    id: data.id,
-                    imageUrl: data.imageUrl,
-                    title: data.title,
-                    categoryId: data.categoryId
-                };
-                galleryElement.appendChild(createProjectElement(newProject)); 
-                document.querySelector('.gallery-modal').appendChild(createProjectElementForModal(newProject)); 
-                closeModal(); 
-            } else {
-                alert('Erreur lors de l\'ajout du projet. Vérifiez que tous les champs sont correctement remplis.');
-            }
-        })
-        .catch(error => console.error('Erreur lors de l\'ajout du projet:', error));
-    });
-
-    // Charger les catégories dans le formulaire d'ajout de projet
+    // Fonction pour charger les catégories dans le formulaire d'ajout de projet
     function loadCategories() {
         fetch('http://localhost:5678/api/categories')
         .then(response => response.json())
@@ -325,10 +367,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Erreur lors de la récupération des catégories:', error));
     }
 
-    // Appeler cette fonction après que la page se charge
+    // Charger les projets et les filtres lors du chargement de la page
     window.onload = function() {
         fetchAndDisplayProjects(); 
         fetchAndDisplayFilters();  
         checkIfLoggedIn();         
     };
 });
+

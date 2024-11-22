@@ -85,23 +85,29 @@
                     <div class="gallery-modal">
                         <!-- Galerie dynamique des travaux ici -->
                     </div>
-                    
+
                     <hr class="separator">
                     <button id="addNewPhotoBtn">Ajouter une photo</button>
                 </div>
 
                 <!-- Contenu de la seconde vue "Ajout photo" -->
-                <div id="add-photo-view">
-                    <h2>Ajouter un nouveau projet</h2>
+                <div id="add-photo-view" > 
+                    <h2>Ajout Photo</h2>
                     
                     <form id="add-photo-form">
-                        <!-- Conteneur d'aperçu de l'image avec fond bleu clair et icône ajout -->
-                        <div class="image-preview-container">
-                            <img src="#" id="img-preview" alt="Aperçu de l'image">
-                            <button id="modal-img-add" type="button" class="file-upload-label"><span>+ Ajouter photo</span></button>
-                            <input type="file" id="img-input" class="file-input" accept=".png, .jpg, .jpeg">
-                            <p>jpg, png : 4mo max</p>
-                        </div>
+                        
+<!-- Conteneur d'aperçu de l'image avec fond bleu clair et icône ajout -->
+<div class="image-preview-container">
+    <i class="far fa-image icon-upload-preview"></i> <!-- Icône d'ajout pour l'aperçu -->
+    <button id="modal-img-add" type="button" class="file-upload-label"><span>+ Ajouter photo</span></button>
+    <input type="file" id="img-input" class="file-input" accept=".png, .jpg, .jpeg">
+    <p class="file-info">jpg, png : 4mo max</p>
+    
+    <!-- Élément d'aperçu de l'image sélectionnée -->
+    <img id="imagePreview" alt="Aperçu de l'image">
+</div>
+
+
 
                         <!-- Conteneur pour les champs titre et catégorie -->
                         <div class="input-group">
@@ -115,6 +121,9 @@
                                 <!-- Autres options ici -->
                             </select>
                         </div>
+
+                          <!-- Ligne grise -->
+    <hr class="separator">
 
                         <!-- Bouton de soumission -->
                         <button type="submit" disabled>Ajouter</button>

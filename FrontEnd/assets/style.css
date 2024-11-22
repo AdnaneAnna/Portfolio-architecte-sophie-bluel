@@ -288,6 +288,20 @@ footer nav ul li {
     font-family: Arial, sans-serif;
 }
 
+.file-input {
+    display: none; /* Masque le bouton de sélection de fichier */
+}
+
+.file-info {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    color: #666; /* Couleur grise pour plus de lisibilité */
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+
 /* Styles pour les filtres */
 #filters {
     display: flex;
@@ -346,6 +360,11 @@ footer nav ul li {
 }
 
 /* Styles pour la modale */
+
+#modal { 
+    display: none;
+}
+
 .modal {
     display: flex;
     justify-content: center;
@@ -360,15 +379,14 @@ footer nav ul li {
 }
 
 .modal-content {
-    background-color: white;
+    width: 400px; /* Largeur suffisante pour tous les éléments */
     padding: 30px;
-    width: 500px;
-    height: 470px;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
     position: relative;
-    z-index: 10001;
 }
+
 
 .close {
     position: absolute;
@@ -391,39 +409,52 @@ footer nav ul li {
 }
 
 /* Style du conteneur pour le champ de téléchargement */
-.image-preview-container {
-    width: 100%;
-    max-width: 400px;
-    height: 200px;
-    background-color: #e9f1f7;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    text-align: center;
-    color: gray;
-    font-family: 'Work Sans', sans-serif;
-}
 
-#img-preview {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
+/* Styles pour l'image */
+
+#imagePreview {
+    width: 90px;
+    height: 130px;
     display: block;
-    border-radius: 5px;
+    border-radius: none;
+    z-index: 10; /* Pour s'assurer qu'elle est visible au-dessus des autres éléments */
 }
 
+/* Bouton "Ajouter photo" */
 .file-upload-label {
-    background-color: #A9BFCB;
-    color: #366a8c;
+    background-color: #c0ccd4; /* Couleur de fond gris clair */
+    color: #366a8c; /* Texte bleu pour correspondre à votre design actuel */
     padding: 10px 20px;
     border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
     display: inline-block;
     cursor: pointer;
     text-align: center;
+    border: none; /* Supprime la bordure noire */
+    outline: none; /* Supprime l'effet de contour lorsque le bouton est sélectionné */
+}
+/* Conteneur de l'aperçu d'image */
+.image-preview-container {
+    width: 350px;
+    height: auto; /* Pour permettre à l'image de déterminer la hauteur */
+    background-color: #e9f1f7; /* Fond bleu clair */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Aligner l'image au centre */
+    text-align: center;
+    color: gray;
+    font-family: 'Work Sans', sans-serif;
+    position: relative; 
+    overflow: visible; /* Pour être sûr que rien n'est coupé */
+}
+
+/* Icône de l'aperçu (montagne) */
+.icon-upload-preview {
+    font-size: 90px; /* Taille augmentée pour une meilleure visibilité */
+    color: #c0ccd4; /* Gris clair */
+    margin-bottom: 10px; /* Espacement entre l'icône et le bouton */
+    margin-top: 10px;
 }
 
 /* Style des champs "Titre" et "Catégorie" */
@@ -436,10 +467,26 @@ footer nav ul li {
     margin-bottom: 8px;
 }
 
-#add-photo-form input[type="text"],
-#add-photo-form select {
-    width: 70%;
-    padding: 14px;
+.input-group {
+    display: flex;
+    flex-direction: column; /* Positionne verticalement le label et l'input */
+    align-items: flex-start; /* Aligne le contenu à gauche */
+    width: 100%; /* S'étend sur toute la largeur */
+    margin-bottom: 10px; /* Espacement entre les champs */
+}
+
+#add-photo-form label {
+    margin-bottom: 5px; /* Réduit l'espacement entre le label et l'input */
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+    font-weight: 500;
+    text-align: left; /* Alignement à gauche */
+}
+
+#add-photo-form input[type="text"]{
+    width: 330px; /* Ajustez pour correspondre à l'encadré bleu clair */
+    padding: 10px;
     font-size: 14px;
     font-family: 'Work Sans', sans-serif;
     color: #333;
@@ -447,7 +494,30 @@ footer nav ul li {
     border: none;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
     outline: none;
+    margin: 0; /* Supprime le décalage */
 }
+
+#add-photo-form select {
+    width: 350px; /* Ajustez pour correspondre à l'encadré bleu clair */
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+    background-color: white;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    outline: none;
+    margin: 0; /* Supprime le décalage */
+}
+
+#add-photo-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23B0B0B0'%3E%3Cpath fill-rule='evenodd' d='M6 8l4 4 4-4H6z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
 
 #add-photo-form input[type="text"]::placeholder {
     color: #B0B0B0;
@@ -465,17 +535,16 @@ footer nav ul li {
 .gallery-modal {
     display: grid;
     grid-template-columns: repeat(5, 20%);
-    column-gap: 3px;
-    row-gap: 30px;
-    max-height: 500px;
-    overflow-y: auto;
-    padding: 20px;
+    column-gap: 3px; /* Espacement horizontal entre les images */
+    row-gap: 10px; /* Espacement vertical entre les images */
+    padding: 3px; /* Ajoute un espace intérieur pour éloigner les images des bords */
+    justify-items: center; /* Centre les images horizontalement */
 }
 
 .gallery-modal figure {
     position: relative;
-    margin: 0;
-    padding: 0;
+    margin: 3px;
+    position: relative; /* Nécessaire pour positionner l'icône */
 }
 
 .gallery-modal img {
@@ -509,7 +578,7 @@ footer nav ul li {
 
 .separator {
     width: 90%;
-    margin: 40px auto 20px auto;
+    margin: 10px auto 10px auto;
     border: none;
     border-top: 2px solid #D3D3D3 !important;
 }
@@ -542,8 +611,9 @@ footer nav ul li {
     background-color: #144536;
 }
 
+
 #add-photo-view {
-    display: none;
+    display: none; 
 }
 
 #add-photo-view h2 {
@@ -567,28 +637,31 @@ footer nav ul li {
 }
 
 #add-photo-form button[type="submit"] {
-    margin: 20px auto 0 auto;
+    width: 200px; /* Même largeur que l'encadré bleu */
+    margin: 10px auto 0 auto; /* Centre le bouton sous le formulaire */
     padding: 10px;
-    width: 179px;
-    height: 36px;
-    background-color: #A7A7A7;
+    background-color: #1D6154;
     color: #FFFFFF;
     border: none;
     border-radius: 60px;
-    cursor: not-allowed;
+    cursor: pointer;
     font-family: 'Syne';
     font-weight: 700;
     font-size: 14px;
     line-height: 16.8px;
     text-align: center;
     display: block;
-    transition: background-color 0.3s ease;
 }
 
-#add-photo-form button[type="submit"]:not([disabled]) {
-    background-color: #1D6154;
-    cursor: pointer;
+button[type="submit"]:disabled {
+    background-color: #b0b0b0 !important; /* Couleur grise exacte */
+    cursor: not-allowed !important; /* Désactivation visuelle */
+    color: white !important; /* Assure que le texte reste lisible */
+    border: none !important; /* Supprime les bordures */
+    opacity: 1 !important; /* Pas de transparence */
 }
+
+
 
 /*************/
 
